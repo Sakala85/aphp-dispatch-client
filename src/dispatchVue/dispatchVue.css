@@ -1,0 +1,65 @@
+.InputForm__LogIn{
+    height: 100px;
+}
+.Dispatch__Form__Button{
+    margin-top: 20px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.board_user{
+    background-color: green;
+    height: 100%;
+}
+
+.offline{
+    background-color: red;
+}
+
+.occuped{
+    background-color: orange;
+}
+
+ .task_finished{
+     display: none!important;
+ }
+
+.board_user_div{
+    height: 110px;
+}
+
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+  
+    width: 100%;
+    max-width: 768px;
+    height: 100vh;
+  
+    overflow: hidden;
+  
+    margin: 0 auto;
+    padding: 15px;
+  }
+  
+  .flexbox .board {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    background-color: black;
+  
+    padding: 15px;
+  
+  }
+  
+  .flexbox .board .card {
+    padding: 15px 25px;
+    background-color: burlywood;
+  
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
