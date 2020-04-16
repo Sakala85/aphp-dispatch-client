@@ -14,7 +14,7 @@ const ClientVue = () => {
   const [task, setTask] = useState("");
   const [username, setUsername] = useState(false);
   const [tmpUsername, setTmpUsername] = useState(false);
-  const ENDPOINT = "https://react-dispatch-aphp.herokuapp.com/";
+  const ENDPOINT = "https://aphp-dispatch.herokuapp.com/";
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

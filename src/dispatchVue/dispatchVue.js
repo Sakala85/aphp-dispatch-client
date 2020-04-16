@@ -14,7 +14,7 @@ let socket;
 const DispatchVue = () => {
   const [task, setTask] = useState("");
   const [user, setUser] = useState("");
-  const ENDPOINT = "https://react-dispatch-aphp.herokuapp.com/";
+  const ENDPOINT = "https://aphp-dispatch.herokuapp.com/";
   const [formState, inputHandler] = useForm(
     {
       task: {

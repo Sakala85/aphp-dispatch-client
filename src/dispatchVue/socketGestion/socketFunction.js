@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 let socket;
-const ENDPOINT = "https://react-dispatch-aphp.herokuapp.com/";
+const ENDPOINT = "https://aphp-dispatch.herokuapp.com/";
 
 function AssignTask(user, task_id) {
   socket = io(ENDPOINT);
