@@ -9,7 +9,7 @@ function Board(props) {
     card.style.display = "block";
     // e.target.appendChild(card.cloneNode(true));
 
-    AssignTask(props.children.props.children, card_id);
+    AssignTask(props.children, card_id);
   };
 
   const dragOver = (e) => {

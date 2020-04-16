@@ -23,7 +23,7 @@ const TaskItem = (props) => {
         </Card>
       ) : (
         <Card id={props.id} className="card task_problem" draggable="true" onClick={deleteThisTask}>
-          {props.task}
+          ***{props.task}*** <br /> {props.problem}
         </Card>
       )}
     </div>

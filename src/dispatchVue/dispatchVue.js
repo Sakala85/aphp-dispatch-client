@@ -83,7 +83,6 @@ const DispatchVue = () => {
         <Button
           className="Dispatch__Form__Button"
           onClick={addTask}
-          variant="success"
           disabled={!formState.isValid}
         >
           Add Task

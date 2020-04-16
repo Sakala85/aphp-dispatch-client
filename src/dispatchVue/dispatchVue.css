@@ -1,15 +1,19 @@
 body {
-    background: no-repeat url("../img/dispatch.jpg");
-    background-size: cover;
-    background-attachment:fixed;
-    background-position:100% 0%;
-}
+  background-color: white!important;
 
+}
+.card__position{
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
 .InputForm__LogIn {
   height: 100px;
 }
+
 .Dispatch__Form__Button {
-  margin-top: 20px;
+  background-color: #00e600!important;
+  border: none!important;
 }
 * {
   margin: 0;
@@ -17,31 +21,20 @@ body {
   box-sizing: border-box;
 }
 
-.board_user {
-  background-color: green;
-  height: 100%;
-}
-
 .offline {
-  background-color: red;
+  background-color: red!important;
 }
 
 .occuped {
-  background-color: orange;
+  background-color: #ffad33!important;
 }
 
 .task_problem {
-    background-color: red!important;
+  background-color: red !important;
 }
-.tab__users{
-    overflow: scroll;
 
-}
-.task_assigned{
-    background-color: orange!important;
-}
-.board_user_div {
-  height: 110px;
+.task_assigned {
+  background-color: #ffad33 !important;
 }
 
 .flexbox {
@@ -62,15 +55,18 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
+  border-radius: 15px;
   max-width: 300px;
-  background-color: black;
-
+  background-color: white !important;
+  border: 1px solid;
+  overflow: scroll;
   padding: 15px;
 }
 
 .flexbox .board .card {
   padding: 15px 25px;
-  background-color: burlywood;
+  background-color: #00e600;
+  border-radius: 15px;
 
   cursor: pointer;
   margin-bottom: 15px;

@@ -6,6 +6,12 @@ import { useForm } from "../hooks/form-hook";
 import { Button, Card } from "react-bootstrap";
 import dispatchImg from "../img/dispatch.jpg";
 import io from "socket.io-client";
+import LoadingSpinner from "../UIElements/LoadingSpinner";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 let socket;
 const ClientVue = () => {
@@ -46,6 +52,12 @@ const ClientVue = () => {
       setOnline(true);
     }
     socket.on("sendTask", function (task) {
+      if (task === null) {
+        NotificationManager.warning("Tache desafectee", "Attention", 3000);
+      } else {
+
+      NotificationManager.success("Nouvelle tache attribuee", "Attention", 3000);
+    }
       setTask(task);
     });
   }, [ENDPOINT, username, task, userId, online]);
@@ -61,7 +73,6 @@ const ClientVue = () => {
       }
     });
     setTask("");
-
   };
 
   const goOffline = (event) => {
@@ -85,6 +96,8 @@ const ClientVue = () => {
 
   return (
     <React.StrictMode>
+      <NotificationContainer />
+
       {!online ? (
         <form>
           <div className="InputForm__LogIn">
@@ -145,12 +158,14 @@ const ClientVue = () => {
                       Report Problem
                     </Button>
                   </form>
-
                 </div>
               ) : (
                 <div>
                   <Card.Title>Waiting for a task...</Card.Title>
-                  <Card.Text>{task}</Card.Text>
+                  <Card.Text>
+                    <LoadingSpinner />
+                    {task}
+                  </Card.Text>
                   <Button variant="danger" onClick={goOffline}>
                     goOffline
                   </Button>
