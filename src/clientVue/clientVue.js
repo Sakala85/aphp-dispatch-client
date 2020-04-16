@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Input from "../FormElements/Input";
 import { VALIDATOR_REQUIRE } from "../util/validators";
 import { useForm } from "../hooks/form-hook";
-import { Button, Card, Modal } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import dispatchImg from "../img/dispatch.jpg";
 import io from "socket.io-client";
 
@@ -15,36 +15,53 @@ const ClientVue = () => {
   const [username, setUsername] = useState(false);
   const [tmpUsername, setTmpUsername] = useState(false);
   const ENDPOINT = "https://aphp-dispatch.herokuapp.com/";
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [formState, inputHandler] = useForm(
     {
       username: {
         value: tmpUsername,
         isValid: true,
       },
+      problem: {
+        value: null,
+        isValid: true,
+      },
     },
     false
   );
   // --------Connexion to socket-----------
+  window.onbeforeunload = (e) => {
+    socket.emit("disconnectUser", { username }, (error) => {
+      if (error) {
+        alert(error);
+      }
+    });
+  };
   useEffect(() => {
     socket = io(ENDPOINT);
     if (username !== false && username !== null && online !== true) {
       socket.emit("connectNew", { username }, (user) => {
         setUserId(user.id);
+        setTask(user.task);
       });
       setOnline(true);
     }
     socket.on("sendTask", function (task) {
-      console.log(task);
       setTask(task);
     });
   }, [ENDPOINT, username, task, userId, online]);
-  // --------Task System-------------
 
   const goOnline = (event) => {
     setUsername(formState.inputs.username.value);
+  };
+  const reportProblem = (event) => {
+    const problem = formState.inputs.problem.value;
+    socket.emit("reportProblem", { task, problem, username }, (error) => {
+      if (error) {
+        alert(error);
+      }
+    });
+    setTask("");
+
   };
 
   const goOffline = (event) => {
@@ -66,23 +83,8 @@ const ClientVue = () => {
     setTask("");
   };
 
-
   return (
     <React.StrictMode>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>PROBLEME</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>INPUT PROBLEM</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger" onClick={handleClose}>
-            Envoyer
-          </Button>
-        </Modal.Footer>
-      </Modal>
       {!online ? (
         <form>
           <div className="InputForm__LogIn">
@@ -121,9 +123,29 @@ const ClientVue = () => {
                   <Button variant="success" onClick={finishTask}>
                     Tache Terminee
                   </Button>
-                  <Button variant="danger" onClick={handleShow}>
-                    Probleme
-                  </Button>
+                  <form>
+                    <div className="InputForm__LogIn">
+                      <Input
+                        id="problem"
+                        element="input"
+                        type="text"
+                        label="Probleme ?"
+                        validators={[VALIDATOR_REQUIRE()]}
+                        errorText="Please enter a problem."
+                        onInput={inputHandler}
+                        initialValue={""}
+                        initialValid={false}
+                      />
+                    </div>
+                    <Button
+                      onClick={reportProblem}
+                      variant="danger"
+                      disabled={!formState.isValid}
+                    >
+                      Report Problem
+                    </Button>
+                  </form>
+
                 </div>
               ) : (
                 <div>
@@ -138,7 +160,6 @@ const ClientVue = () => {
           </Card>
         </div>
       )}
-      <Button>Ne pas toucher</Button>
     </React.StrictMode>
   );
 };

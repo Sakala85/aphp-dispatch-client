@@ -37,8 +37,7 @@ const DispatchVue = () => {
   }, [ENDPOINT]);
 
   useEffect(() => {
-    socket.on("getTask", function (task, user) {
-      // setUser(user);
+    socket.on("getTask", function (task) {
       setTask(task);
     });
   }, []);
@@ -50,13 +49,7 @@ const DispatchVue = () => {
   }, []);
 
   // --------Task System-------------
-  const consultUsers = (event) => {
-    socket.emit("consultUsers", {}, (error) => {
-      if (error) {
-        alert(error);
-      }
-    });
-  };
+
 
   const addTask = (event) => {
     const task = formState.inputs.task.value;
@@ -69,11 +62,10 @@ const DispatchVue = () => {
     }
   };
 
+
+
   return (
     <React.Fragment>
-      <Button onClick={consultUsers} variant="success">
-        CONSULT
-      </Button>
       <form>
         <div className="InputForm__LogIn">
           <Input

@@ -4,6 +4,7 @@ import UserItem from "./UserItem";
 import "bootstrap/dist/css/bootstrap.css";
 
 const UserList = (props) => {
+  
   if (props.users.length === 0) {
     return (
       <div className="center">
@@ -14,7 +15,7 @@ const UserList = (props) => {
     );
   }
   return (
-    <Card id="userList" style={{ width: '18rem' }}>
+    <Card id="userList" style={{ width: '18rem' }} className="tab__users">
         <h1>Utilisateurs</h1>
         <br />
         {props.users.user.map((user) => {

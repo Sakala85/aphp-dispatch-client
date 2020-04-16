@@ -21,6 +21,7 @@ function Card(props) {
       id={props.id}
       className={props.className}
       draggable={props.draggable}
+      onClick={props.onClick}
       onDragStart={dragStart}
       onDragOver={dragOver}
     >

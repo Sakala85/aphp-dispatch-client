@@ -24,6 +24,7 @@ const TaskList = (props) => {
                 key={task.id}
                 id={task.id}
                 state={task.assigned}
+                username={task.username}
               />
             );
         })}
